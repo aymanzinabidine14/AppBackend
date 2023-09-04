@@ -25,7 +25,7 @@ public class User {
     private String email;
     private String password;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private List<Sandage> sandages_c;
 
@@ -34,10 +34,14 @@ public class User {
     private List<Sandage> sandages_p = new ArrayList<>();
 
 
-
     @ManyToMany (mappedBy = "userList",fetch = FetchType.EAGER)
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+   // @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private List<Option> options=new ArrayList<>();
+
+
+    @ManyToMany(mappedBy = "BUsers")
+    private List<Booking> bookings = new ArrayList<>();
+
 
     public User(Long idUser, String username, String email, String password) {
         IdUser = idUser;

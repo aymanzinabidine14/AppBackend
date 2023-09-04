@@ -1,30 +1,19 @@
 package com.doodle.backend.Response;
 
-import lombok.Getter;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class LoginResponse {
 
-    @Getter
     private String Message ;
     private boolean Status;
+    private Long IdUser;
 
-    public LoginResponse(String message, boolean status) {
-        Message = message;
-        Status = status;
-    }
 
-    public LoginResponse() {
-    }
 
-    public boolean getStatus() {
-        return Status;
-    }
-
-    public void setMessage(String message) {
-        Message = message;
-    }
-
-    public void setStatus(boolean status) {
-        Status = status;
-    }
 }

@@ -25,5 +25,7 @@ public interface UserService {
 
     LoginResponse LoginUser(LoginDTO loginDTO);
 
+    //User FindByEmailAndPassword(LoginDTO loginDTO);
+
 
 }

@@ -47,7 +47,6 @@ public class UserServiceImp implements UserService {
     @Override
     public void deleteUserById(Long id) {
         userRepository.deleteById(id);
-
     }
 
     @Override
@@ -81,15 +80,22 @@ public class UserServiceImp implements UserService {
             if (isPwdRight) {
                 Optional<User> user = userRepository.findOneByEmailAndPassword(loginDTO.getEmail(), encodedPassword);
                 if (user.isPresent()) {
-                    return new LoginResponse("Login Success", true);
+                    return new LoginResponse("Login Success", true,user1.getIdUser());
                 } else {
-                    return new LoginResponse("Login Failed", false);
+                    return new LoginResponse("Login Failed", false,0L);
                 }
             } else {
-                return new LoginResponse("password Not Match", false);
+                return new LoginResponse("password Not Match", false,0L);
             }
         }else {
-            return new LoginResponse("Email not exits", false);
+            return new LoginResponse("Email not exits", false,0L);
         }
     }
+
+    /*@Override
+    public User FindByEmailAndPassword(LoginDTO loginDTO) {
+        return userRepository.findOneByEmailAndPassword2(loginDTO.getEmail(),loginDTO.getPassword());
+    }*/
+
+
 }

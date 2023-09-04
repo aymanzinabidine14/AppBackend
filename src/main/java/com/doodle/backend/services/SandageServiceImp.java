@@ -42,13 +42,13 @@ public class SandageServiceImp implements SandageService{
     }
 
     @Override
-    public void deleteUserById(Long id) {
+    public void deleteSandageById(Long id) {
         sandageRepository.deleteById(id);
 
     }
 
     @Override
-    public void deleteAllUsers() {
+    public void deleteAllSandages() {
         sandageRepository.deleteAll();
 
     }

@@ -25,6 +25,8 @@ public class Option {
     private LocalDate date;
     private LocalTime time;
 
+    private LocalTime endTime;
+
 
 
     @ManyToOne
@@ -33,9 +35,15 @@ public class Option {
 
 
 
-    @ManyToMany (fetch = FetchType.EAGER)
+    @ManyToMany (fetch = FetchType.EAGER,cascade ={CascadeType.PERSIST,CascadeType.MERGE})
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @JoinTable(name="option_user",
+    joinColumns = @JoinColumn(name = "option_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id")
+    )
     private List<User> userList=new ArrayList<>();
+
+
 
 
 }

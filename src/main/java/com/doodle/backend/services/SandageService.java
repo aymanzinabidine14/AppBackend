@@ -15,7 +15,7 @@ public interface SandageService {
     Sandage getSandage(Long id);
     List<Sandage> getSandages();
     Page<Sandage> getAllSandagesByPage(int page, int size);
-    void deleteUserById(Long id);
-    void deleteAllUsers();
+    void deleteSandageById(Long id);
+    void deleteAllSandages();
 
 }

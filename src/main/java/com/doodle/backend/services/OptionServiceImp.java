@@ -1,7 +1,9 @@
 package com.doodle.backend.services;
 
 import com.doodle.backend.entities.Option;
+import com.doodle.backend.entities.Sandage;
 import com.doodle.backend.repositories.OptionRepository;
+import com.doodle.backend.repositories.SandageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -17,9 +19,8 @@ public class OptionServiceImp implements OptionService{
     @Autowired
     OptionRepository optionRepository;
 
-
-
-
+    @Autowired
+    SandageServiceImp sandageServiceImp;
 
     @Override
     public Option saveOption(Option option) {
@@ -54,8 +55,10 @@ public class OptionServiceImp implements OptionService{
 
     @Override
     public void deleteAllOptions() {
-
         optionRepository.deleteAll();
-
     }
+
+
+
+
 }

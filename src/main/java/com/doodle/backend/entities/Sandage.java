@@ -25,14 +25,20 @@ public class Sandage {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private User user;
 
-
-
-    @ManyToMany (fetch = FetchType.EAGER)
+    @ManyToMany (fetch = FetchType.EAGER,cascade ={CascadeType.PERSIST,CascadeType.MERGE})
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @JoinTable(name="sandage_user",
+            joinColumns = @JoinColumn(name = "sandage_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id")
+    )
     private List<User> users=new ArrayList<>();
 
-    @OneToMany (mappedBy = "sandage",fetch = FetchType.LAZY)
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+
+    @OneToMany (mappedBy = "sandage",fetch = FetchType.LAZY,cascade =CascadeType.ALL,orphanRemoval = true)
     private List<Option> options=new ArrayList<>();
+
+    @OneToOne
+    private Option booking;
+
 
 }
