@@ -19,6 +19,8 @@ public class UserServiceImp implements UserService {
     @Autowired
     UserRepository userRepository;
 
+
+
     @Override
     public User saveUser(User user) {
         return userRepository.save(user);
@@ -62,8 +64,10 @@ public class UserServiceImp implements UserService {
                 userdto.getIdUser(),
                 userdto.getUsername(),
                 userdto.getEmail(),
-                userdto.getPassword()
+                userdto.getPassword(),
+                "USER"
         );
+       // accountServiceImp.addRoleToUser(user,"USER");
         userRepository.save(user);
         return user.getUsername();
     }
@@ -80,22 +84,19 @@ public class UserServiceImp implements UserService {
             if (isPwdRight) {
                 Optional<User> user = userRepository.findOneByEmailAndPassword(loginDTO.getEmail(), encodedPassword);
                 if (user.isPresent()) {
-                    return new LoginResponse("Login Success", true,user1.getIdUser());
+                    return new LoginResponse("Login Success", true,user1.getIdUser(),user1.getRole(),user1.getUsername());
                 } else {
-                    return new LoginResponse("Login Failed", false,0L);
+                    return new LoginResponse("Login Failed", false,0L,null,null);
                 }
             } else {
-                return new LoginResponse("password Not Match", false,0L);
+                return new LoginResponse("password Not Match", false,0L,null,null);
             }
         }else {
-            return new LoginResponse("Email not exits", false,0L);
+            return new LoginResponse("Email not exits", false,0L,null,null);
         }
     }
 
-    /*@Override
-    public User FindByEmailAndPassword(LoginDTO loginDTO) {
-        return userRepository.findOneByEmailAndPassword2(loginDTO.getEmail(),loginDTO.getPassword());
-    }*/
+
 
 
 }

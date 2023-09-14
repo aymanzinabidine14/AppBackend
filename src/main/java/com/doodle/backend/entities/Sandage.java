@@ -20,6 +20,7 @@ public class Sandage {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long IdSandage;
     private String titre;
+    private String Description;
 
     @ManyToOne
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
@@ -27,6 +28,7 @@ public class Sandage {
 
     @ManyToMany (fetch = FetchType.EAGER,cascade ={CascadeType.PERSIST,CascadeType.MERGE})
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+
     @JoinTable(name="sandage_user",
             joinColumns = @JoinColumn(name = "sandage_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id")

@@ -14,6 +14,11 @@ public class LoginResponse {
     private boolean Status;
     private Long IdUser;
 
+    private String role;
+
+
+    private String username;
+
 
 
 }

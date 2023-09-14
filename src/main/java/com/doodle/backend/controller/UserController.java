@@ -1,6 +1,7 @@
 package com.doodle.backend.controller;
 
 import com.doodle.backend.DTO.LoginDTO;
+import com.doodle.backend.DTO.UserSandageInfo;
 import com.doodle.backend.DTO.userDTO;
 import com.doodle.backend.Response.LoginResponse;
 import com.doodle.backend.entities.User;
@@ -9,6 +10,9 @@ import com.doodle.backend.services.UserServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @CrossOrigin("http://localhost:3000")
@@ -21,6 +25,7 @@ public class UserController {
     UserRepository userRepository;
 
 
+
     @GetMapping("/user/{id}")
     public User getUser(@PathVariable Long id){return userServiceImp.getUser(id);}
 
@@ -28,6 +33,7 @@ public class UserController {
     public String addUser(@RequestBody userDTO userdto)
     {
         return userServiceImp.addUser(userdto);
+
     }
 
     @PostMapping("/login")
@@ -50,7 +56,35 @@ public class UserController {
     }
 
 
+    @PostMapping("updateUser/{id}/{username}/{email}/{password}")
+    User UpdateUser(@PathVariable Long id,@PathVariable String username,@PathVariable String email,@PathVariable String password){
+        User user=userServiceImp.getUser(id);
+        user.setUsername(username);
+        user.setEmail(email);
+        user.setPassword(password);
+        userServiceImp.saveUser(user);
+        return user;
+    }
 
+    @GetMapping("/usersInfo")
+    public List<UserSandageInfo> getUsers(){
+
+      List<UserSandageInfo> userSandageInfoList=new ArrayList<>();
+
+       for(User user: userServiceImp.getUsers()){
+
+           userSandageInfoList.add(new UserSandageInfo(user.getIdUser(),user.getUsername(),user.getEmail(),
+                   user.getPassword(),user.getSandages_c().size(),user.getSandages_p().size()));
+
+       }
+
+       return userSandageInfoList;
+    }
+
+    @DeleteMapping("/deleteUser/{idUser}")
+    void deleteOptionById(@PathVariable Long idUser){
+        userServiceImp.deleteUserById(idUser);
+    }
 
 
 

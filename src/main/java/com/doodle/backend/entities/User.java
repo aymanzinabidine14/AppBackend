@@ -4,6 +4,7 @@ package com.doodle.backend.entities;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -16,6 +17,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class User {
 
     @Id
@@ -24,6 +26,8 @@ public class User {
     private String username;
     private String email;
     private String password;
+
+    private String role;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
@@ -38,16 +42,21 @@ public class User {
    // @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private List<Option> options=new ArrayList<>();
 
-
-    @ManyToMany(mappedBy = "BUsers")
+    @ManyToMany(mappedBy = "BUsers", fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     private List<Booking> bookings = new ArrayList<>();
 
-
-    public User(Long idUser, String username, String email, String password) {
+    public User(Long idUser, String username, String email, String password,String role) {
         IdUser = idUser;
         this.username = username;
         this.email = email;
         this.password = password;
+        this.role=role;
+    }
+    public User( String username, String email, String password,String role) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.role=role;
     }
 
 

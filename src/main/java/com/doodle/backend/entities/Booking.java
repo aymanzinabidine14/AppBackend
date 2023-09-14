@@ -30,12 +30,9 @@ public class Booking {
     private Integer placesAvailable;
     private String imageFilePath;
 
-    @ManyToMany
-    @JoinTable(
-            name = "booking_user",
-            joinColumns = @JoinColumn(name = "IdBooking"),
-            inverseJoinColumns = @JoinColumn(name = "IdUser")
-    )
+
+
+    @ManyToMany (fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     @JsonIgnore
     private List<User> BUsers = new ArrayList<>();
 

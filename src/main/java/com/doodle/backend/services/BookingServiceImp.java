@@ -96,8 +96,8 @@ public class BookingServiceImp implements BookingService{
     }
 
     @Override
-    public Optional<Booking> getEventById(Long IdBooking) {
-        return bookingRepository.findById(IdBooking);
+    public Booking getEventById(Long IdBooking) {
+        return bookingRepository.findById(IdBooking).get();
     }
 
     @Transactional
@@ -107,7 +107,9 @@ public class BookingServiceImp implements BookingService{
                 .orElseThrow(() -> new RuntimeException("Booking not found"));
         User user = userRepository.findById(IdUser)
                 .orElseThrow(() -> new RuntimeException("User not found"));
-        booking.getBUsers().add(user);
-        bookingRepository.save(booking);
+            booking.getBUsers().add(user);
+            bookingRepository.save(booking);
+
+
     }
 }

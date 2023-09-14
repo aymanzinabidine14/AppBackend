@@ -21,7 +21,7 @@ public interface BookingService {
 
     public Booking createEvent(Booking booking);
 
-    public Optional<Booking> getEventById(@PathVariable Long IdBooking);
+    public Booking getEventById(@PathVariable Long IdBooking);
 
     public void bookEvent(Long IdBooking, Long IdUser);
 }

@@ -146,6 +146,7 @@ public class SandageController {
     Sandage UpdateSandage(@PathVariable Long idSandage,@RequestBody Sandage sandage){
     Sandage sandage1=sandageServiceImp.getSandage(idSandage);
     sandage1.setTitre(sandage.getTitre());
+    sandage1.setDescription(sandage.getDescription());
     return sandageServiceImp.saveSandage(sandage1);
     }
 
