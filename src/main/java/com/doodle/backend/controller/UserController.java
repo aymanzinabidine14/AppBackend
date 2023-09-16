@@ -73,8 +73,10 @@ public class UserController {
 
        for(User user: userServiceImp.getUsers()){
 
-           userSandageInfoList.add(new UserSandageInfo(user.getIdUser(),user.getUsername(),user.getEmail(),
-                   user.getPassword(),user.getSandages_c().size(),user.getSandages_p().size()));
+           if(user.getRole().equals("USER")) {
+               userSandageInfoList.add(new UserSandageInfo(user.getIdUser(), user.getUsername(), user.getEmail(),
+                       user.getPassword(), user.getSandages_c().size(), user.getSandages_p().size()));
+           }
 
        }
 
